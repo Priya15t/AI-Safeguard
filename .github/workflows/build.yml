@@ -25,6 +25,9 @@ jobs:
         with:
           channel: 'stable'
           
+      - name: Recreate Android Project Files
+        run: flutter create --project-name ai_safeguard .
+        
       - name: Get Dependencies
         run: flutter pub get
         
