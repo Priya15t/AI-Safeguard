@@ -28,6 +28,9 @@ jobs:
       - name: Get Dependencies
         run: flutter pub get
         
+      - name: Patch Telephony Plugin
+        run: sed -i 's/android {/android {\n    namespace "com.shounakmulay.telephony"/' /home/runner/.pub-cache/hosted/pub.dev/telephony-*/android/build.gradle
+        
       - name: Build APK
         run: flutter build apk --release || (flutter build apk --release > build_log.txt 2>&1 ; exit 1)
         
