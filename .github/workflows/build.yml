@@ -29,7 +29,10 @@ jobs:
         run: flutter pub get
         
       - name: Patch Telephony Plugin
-        run: sed -i 's/android {/android {\n    namespace "com.shounakmulay.telephony"/' /home/runner/.pub-cache/hosted/pub.dev/telephony-*/android/build.gradle
+        run: |
+          sed -i 's/android {/android {\n    namespace "com.shounakmulay.telephony"/' /home/runner/.pub-cache/hosted/pub.dev/telephony-*/android/build.gradle
+          echo -e "\nandroid {\n  compileOptions {\n    sourceCompatibility JavaVersion.VERSION_17\n    targetCompatibility JavaVersion.VERSION_17\n  }\n}" >> /home/runner/.pub-cache/hosted/pub.dev/telephony-*/android/build.gradle
+          echo -e "\ntasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach { kotlinOptions { jvmTarget = '17' } }" >> /home/runner/.pub-cache/hosted/pub.dev/telephony-*/android/build.gradle
         
       - name: Build APK
         run: flutter build apk --release || (flutter build apk --release > build_log.txt 2>&1 ; exit 1)
