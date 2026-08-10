@@ -25,8 +25,8 @@ home: isLoggedIn ? EmergencyAlertApp() : LoginPage(),
 
 // --- 1. LOGIN PAGE ---
 class LoginPage extends StatefulWidget {
-@override
-LoginPageState createState() => _LoginPageState();
+  @override
+  State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
